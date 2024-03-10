@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="400" Height="400"
+        
+        x:Class="AvaloniaApp.Views.Window2"
+        Title="Перепроецирование">
+  <Window.Styles>
+
+    <Style Selector="DataGridColumnHeadersPresenter">
+      <Setter Property="Background" Value="Gray"> </Setter>
+    </Style>
+    <Style Selector="DataGridRowHeader">
+      <Setter Property="Background" Value="#0066cf"> </Setter>
+    </Style>
+  </Window.Styles>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" ></RowDefinition>
+      <RowDefinition Height="6*"  ></RowDefinition>
+      <RowDefinition Height="1*"  ></RowDefinition>
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Left" VerticalAlignment="Top" >
+      <TextBlock Text="Инструмент Перпроецирования"></TextBlock>
+      <Button Content="Add Data"  Command="{Binding BtnAddData }"> </Button>
+      <Button Content="Add Layers" Command="{Binding BtnAddLayer }"> </Button>
+    </StackPanel>
+
+    <DataGrid
+      Grid.Row="1"
+      Margin="20" ItemsSource="{Binding MapsLayers}"
+          
+             BorderThickness="1" BorderBrush="Black">
+
+
+      <DataGrid.Styles>
+        <Style Selector="DataGridColumnHeader">
+
+          <Setter Property="Background" Value="#c1c3ed"> </Setter>
+          <Setter   Property="FontStyle"  Value="Oblique"></Setter>
+          <Setter Property="FontSize" Value="14"></Setter>
+          <Setter Property="Foreground" Value="Black"> </Setter>
+        </Style>
+            </DataGrid.Styles>
+    
+      <DataGrid.Columns>
+
+        <DataGridCheckBoxColumn Header="Выбрано" Binding="{Binding IsChecked}" />
+        <DataGridTextColumn Header="Карта"  Binding="{Binding MapFile}"/>
+        <DataGridTextColumn Header="Исходные СК" Binding="{Binding BaseCor}" />
+
+
+        <DataGridTemplateColumn Header="Целевые СК" Width="120">
+          <DataTemplate>
+            <ComboBox Name="ComboBoxResponsible" FontSize="11"
+                         ItemsSource="{Binding $parent[DataGrid].DataContext.CorSysList}">
+
+            </ComboBox>
+          </DataTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Преобразование" Width="120">
+          <DataTemplate>
+            <ComboBox Name="ComboBoxResponsible" FontSize="11"
+                         ItemsSource="{Binding $parent[DataGrid].DataContext.TransformationList}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </DataTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+
+  </Grid>
+</Window>

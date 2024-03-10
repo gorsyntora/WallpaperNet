@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaApp.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+  <Grid   ShowGridLines="True" >
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="20*"></ColumnDefinition>
+      <ColumnDefinition Width="30*"></ColumnDefinition>
+      <ColumnDefinition Width="50*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+  <TextBlock   
+    Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    <Button Name="LoadBtn" 
+            HorizontalAlignment="Center" 
+            Content="Load Image"
+            VerticalAlignment="Bottom" 
+            Margin="0,0,0,10" 
+            Command="{Binding BtnClicked}"> 
+          </Button>
+    <Button Name="GeoCalc"
+          HorizontalAlignment="Center"
+          Content="Load Image"
+          VerticalAlignment="Center"
+          Margin="0,0,0,10"
+          Command="{Binding BtnGeoCalcClicked}">
+    </Button>
+    
+    <TextBlock Background="Red" Grid.Column ="1"> </TextBlock>
+    
+    <Image Name="MainPreviewImg" Grid.Column ="1" Source= "{Binding Cover}"/>
+    <ListBox Name="ImageList" Grid.Column="2" ItemsSource="{Binding Path=GoodItems}"
+                 Background="BlueViolet">
+
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel>
+            <TextBlock Text="{Binding Name}"/>
+            <Image Source="{Binding Bitmap}"> </Image>      
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+
+    </ListBox> 
+</Grid>
+</UserControl>

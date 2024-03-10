@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApp.Views.SpatialCalc"
+        Title="Перепроецирование">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" ></RowDefinition>
+      <RowDefinition Height="6*"  ></RowDefinition>
+      <RowDefinition Height="1*"  ></RowDefinition>
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Left" VerticalAlignment="Top" >
+      <TextBlock Text="Инструмент Перeпроецирования"></TextBlock>
+      <Button Content="Add Data"  Command="{Binding BtnAddData }"> </Button>
+      <Button Content="Add Layers" Command="{Binding BtnAddLayer }"> </Button>
+    </StackPanel>
+
+    <DataGrid
+      Grid.Row="1"
+      Margin="20" ItemsSource="{Binding MapsLayers}"
+             GridLinesVisibility="All"
+             BorderThickness="1" BorderBrush="Black">
+      <DataGrid.Columns>
+
+        <DataGridCheckBoxColumn Header="Выбрано" Binding="{Binding IsChecked}" />
+        <DataGridTextColumn Header="Карта"  Binding="{Binding MapFile}"/>
+        <DataGridTextColumn Header="Исходные СК" Binding="{Binding BaseCor}" />
+
+
+        <DataGridTemplateColumn Header="Целевые СК" Width="120">
+          <DataTemplate>
+            <ComboBox Name="ComboBoxResponsible" FontSize="11"
+                         ItemsSource="{Binding $parent[DataGrid].DataContext.CorSysList}">
+
+            </ComboBox>
+          </DataTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Преобразование" Width="120">
+          <DataTemplate>
+            <ComboBox Name="ComboBoxResponsible" FontSize="11"
+                         ItemsSource="{Binding $parent[DataGrid].DataContext.TransformationList}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </DataTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+
+  </Grid>
+
+</Window>

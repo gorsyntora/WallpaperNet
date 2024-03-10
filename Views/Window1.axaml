@@ -1,0 +1,131 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApp.Views.Window1"
+        Title="Перепроецирование">
+
+  <Grid ShowGridLines="True">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" ></RowDefinition>
+      <RowDefinition Height="6*"  ></RowDefinition>
+      <RowDefinition Height="1*"  ></RowDefinition>
+    </Grid.RowDefinitions>
+
+    <StackPanel Orientation="Horizontal"  
+                HorizontalAlignment="Left" VerticalAlignment="Top" >
+      <ComboBox
+                ItemsSource="{Binding Path=Muses}"
+                 SelectedIndex="0"
+                MaxDropDownHeight="100">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Product}"/>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <Button Content="Add Data"  Command="{Binding BtnAddData }"> </Button>
+      <Button Content="Add Layers" Command="{Binding BtnAddLayer }"> </Button>
+    </StackPanel>
+<ScrollViewer Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel >
+      <StackPanel.Styles>
+        <!--  <Style Selector=":is(Control)">-->
+        <!--   <Style Selector=":is(Button)">-->
+        <!--     <Style Selector=":is(Control).MyStyle"> -->
+        <Style Selector=":is(Control)">
+
+          <Setter Property="Margin" Value="5,0,5,0"/>
+          <!--   <Setter  Property="Background" Value="red"> </Setter> -->
+        </Style>
+
+      </StackPanel.Styles>
+
+      <ListBox ItemsSource="{Binding Path=LayerList}">
+        <ListBox.Styles>
+          <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="1" />
+          </Style>
+        </ListBox.Styles> 
+        
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Border Background="Yellow"
+                    BorderBrush="Black"
+                    BorderThickness="1" >
+                  
+        
+       
+                  <Grid ShowGridLines="True">
+                    <Grid.ColumnDefinitions> 
+                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                    <ColumnDefinition Width="2*" ></ColumnDefinition>
+                    <ColumnDefinition Width="2*" ></ColumnDefinition>
+                    <ColumnDefinition Width="2*" ></ColumnDefinition>
+                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"> </RowDefinition>
+                      <RowDefinition Height="Auto"> </RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    
+                    
+                    
+                    
+                    <TextBlock Width="20" Background="Pink"
+                         Grid.Column="0" Grid.Row="0" Text="No"> </TextBlock>
+                  
+                    <TextBlock Width="80" Background="Pink"
+                       Grid.Column="1" Grid.Row="0" Text="Источник даннных"> </TextBlock>
+
+
+                    <TextBlock Width="20" Background="Pink"
+                         Grid.Column="0" Grid.Row="1"
+                        
+                                     Text="Name" Classes ="MyStyle" > </TextBlock>
+                  <TextBlock Grid.Column="1" Width="80"
+                    Text="{Binding Name}"  Classes ="MyStyle"> </TextBlock>
+                  <TextBlock Grid.Column="2" Grid.Row="1"
+                                
+                    Text="{Binding CoordinateSys}"> </TextBlock>
+                  <ComboBox Width="150" Grid.Column="3" Grid.Row="1"
+                   ItemsSource="{Binding $parent[ListBox].DataContext.CorSysList}"
+                   SelectedIndex="0" MaxDropDownHeight="100">
+                    <ComboBox.ItemTemplate>
+                      <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                      </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <ComboBox Width="150" Grid.Column="4" Grid.Row="1"
+                     ItemsSource="{Binding $parent[ListBox].DataContext.Muses}"
+                     SelectedIndex="0" MaxDropDownHeight="100">
+                    <ComboBox.ItemTemplate>
+                      <DataTemplate>
+                        <TextBlock Text="{Binding Product}" />
+                      </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <Button Content="Speed UP" Grid.Column="5" Grid.Row="1"> </Button>
+</Grid>
+           
+             
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+    </StackPanel>
+   
+  </ScrollViewer>
+  <TextBlock VerticalAlignment="Top"
+               HorizontalAlignment="Center"
+               Text="Geocalc" ></TextBlock>
+
+  </Grid>
+</Window>
