@@ -16,13 +16,12 @@ namespace AvaloniaApp.ViewModels
     public partial class GeoCalcViewModel : ViewModelBase
     {
 
-       
-        private static ObservableCollection<string> _corSysList =  new ObservableCollection<string>(new string[] { "WDS-84", "GOST 1121", "Pulkovo 1942" }.ToList());
-               public static ObservableCollection<string> CorSysList { get => _corSysList; set => _corSysList = value; }
+        private static ObservableCollection<string> _corSysList = new ObservableCollection<string>(new string[] { "WDS-84", "GOST 1121", "Pulkovo 1942" }.ToList());
+        public static ObservableCollection<string> CorSysList { get => _corSysList; set => _corSysList = value; }
         public ObservableCollection<Layer> TransformationList { get; set; } = new();
         public ObservableCollection<MapData> MapsLayers { get; private set; }
 
- 
+
 
         public GeoCalcViewModel()
         {
@@ -30,7 +29,7 @@ namespace AvaloniaApp.ViewModels
             TransformationList.Add(new Layer("Tranformation 2"));
             TransformationList.Add(new Layer("Transformation 3"));
             TransformationList.Add(new Layer("Tranformation 4"));
-          
+
 
             var _mapsLayers = new List<MapData>
             {
@@ -40,16 +39,11 @@ namespace AvaloniaApp.ViewModels
             };
             MapsLayers = new ObservableCollection<MapData>(_mapsLayers);
 
-
         }
-
-
-
 
         public void BtnAddData()
         {
-            //   LayerList.Add(new Layer("Dynamically added layer"));
-
+      
             MapsLayers.Add(new MapData($"Data {MapsLayers.Count}", CorSysList[2], true));
 
             Console.WriteLine("Data added clicked");
@@ -69,7 +63,7 @@ namespace AvaloniaApp.ViewModels
 
         public MapData(string mapFile, string baseCor, bool isChecked)
         {
-            MapFile =  mapFile;
+            MapFile = mapFile;
             BaseCor = baseCor;
             IsChecked = isChecked;
         }
